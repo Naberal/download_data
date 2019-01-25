@@ -2,15 +2,18 @@ package com.java.download_data.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.OffsetDateTime;
+
+/**
+ * Class model for data
+ *
+ * @author Khmelyar Volodymyr
+ */
 
 @Data
 @Entity
-@Table(schema = "data", name = "db_Data")
+@Table(schema = "data", name = "db_data")
 public class DataModel {
     @Id
     @Column(name = "id")
@@ -25,14 +28,15 @@ public class DataModel {
     private String url;
     @Column(name = "title")
     private String title;
-    @Column(name = "documentOf")
+    @Column(name = "document_of")
+    @Enumerated(EnumType.STRING)
     private DocumentOf documentOf;
-    @Column(name = "datePublished")
+    @Column(name = "date_published")
     private OffsetDateTime datePublished;
-    @Column(name = "documentType")
+    @Column(name = "document_type")
     private String documentType;
-    @Column(name = "dateModified")
+    @Column(name = "date_modified")
     private OffsetDateTime dateModified;
-    @Column(name = "relatedItem")
+    @Column(name = "related_item")
     private String relatedItem;
 }

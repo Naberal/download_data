@@ -16,6 +16,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Class Service. It get Json from Url, parser it to {@link DataModel}.
+ * also it save data to DB use {@link DataRepository}
+ *
+ * @author Khmelyar Volodymer
+ */
 @Service
 public class ServiceClass {
     private OkHttpClient client = new OkHttpClient();
@@ -29,7 +35,7 @@ public class ServiceClass {
         try {
             Response response = client.newCall(getAll).execute();
             String line = new BufferedReader(response.body().charStream()).readLine();
-           collect = parser(line);
+            collect = parser(line);
         } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
