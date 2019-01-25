@@ -25,8 +25,12 @@ import java.util.List;
 @Service
 public class ServiceClass {
     private OkHttpClient client = new OkHttpClient();
+    private final DataRepository dataRepository;
+
     @Autowired
-    private DataRepository dataRepository;
+    public ServiceClass(DataRepository dataRepository) {
+        this.dataRepository = dataRepository;
+    }
 
 
     public List<DataModel> getData(@NonNull String url) {
@@ -42,10 +46,10 @@ public class ServiceClass {
         return collect;
     }
 
-    private List<DataModel> parser(String line) {
+    private List<DataModel> parser(String line) throws NullPointerException {
         HashMap<Object, JSONArray> hashMap = JSON.parseObject(line, HashMap.class);
         List<DataModel> collect = new ArrayList();
-        hashMap.values().stream().map(e -> e.toJavaList(DataModel.class)).forEach(e -> collect.addAll(e));
+        hashMap.values().stream().map(e -> e.toJavaList(DataModel.class)).forEach(collect::addAll);
         return collect;
     }
 
